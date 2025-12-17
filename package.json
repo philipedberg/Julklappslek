@@ -11,10 +11,12 @@
     "dev:client": "vite",
     "dev:server": "tsx watch server.ts",
     "build": "tsc -b && vite build",
+    "start": "tsx server.ts",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "tsx": "^4.21.0",
     "cors": "^2.8.5",
     "express": "^5.2.1",
     "react": "^19.2.0",
