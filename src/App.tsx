@@ -9,7 +9,7 @@ interface VoteData {
 // Determine API URL based on environment
 const getAPIUrl = () => {
   // In production (Railway), use relative URL so it works on any domain
-  if (process.env.NODE_ENV === 'production') {
+  if (import.meta.env.PROD) {
     return '/api'
   }
   // In development, use localhost

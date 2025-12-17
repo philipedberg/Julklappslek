@@ -53,7 +53,8 @@ app.post('/api/votes/reset', (req, res) => {
 });
 
 // Serve the frontend for all other routes (SPA fallback)
-app.get('*', (req, res) => {
+// Use `app.use` to avoid path-to-regexp parsing issues with '*' wildcard
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
