@@ -1,8 +1,14 @@
 import cors from 'cors';
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
+
+// Get __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Store votes in memory
 let votes = {
@@ -13,6 +19,10 @@ let votes = {
 app.use(cors());
 app.use(express.json());
 
+// Serve static files from the dist folder (for production)
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// API routes
 // GET current votes
 app.get('/api/votes', (req, res) => {
   res.json(votes);
@@ -42,6 +52,11 @@ app.post('/api/votes/reset', (req, res) => {
   res.json(votes);
 });
 
+// Serve the frontend for all other routes (SPA fallback)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
 app.listen(PORT, () => {
-  console.log(`Vote server running on http://localhost:${PORT}`);
+  console.log(`🎄 Vote server running on http://localhost:${PORT}`);
 });

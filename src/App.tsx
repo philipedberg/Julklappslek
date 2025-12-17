@@ -6,7 +6,17 @@ interface VoteData {
   mario: number
 }
 
-const API_URL = 'http://localhost:3001/api'
+// Determine API URL based on environment
+const getAPIUrl = () => {
+  // In production (Railway), use relative URL so it works on any domain
+  if (process.env.NODE_ENV === 'production') {
+    return '/api'
+  }
+  // In development, use localhost
+  return 'http://localhost:3001/api'
+}
+
+const API_URL = getAPIUrl()
 
 function App() {
   const [votes, setVotes] = useState<VoteData>({ avatar: 0, mario: 0 })
@@ -68,12 +78,11 @@ function App() {
 
         <div className="movies-container">
           <div className={`movie-card ${isAvatarLeading ? 'leading' : ''}`}>
-            <div className="movie-poster avatar-poster">
-              <div className="poster-content">
-                <h2>Avatar</h2>
-                <p>Fire and Ash</p>
-              </div>
-            </div>
+            <img 
+              src="https://m.media-amazon.com/images/M/MV5BZDYxY2I1OGMtN2Y4MS00ZmU1LTgyNDAtODA0MzAyYjI0N2Y2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+              alt="Avatar: Fire and Ash"
+              className="movie-poster avatar-poster"
+            />
             <p className="release-date">17 december 2025</p>
             
             <div className="voting-section">
@@ -97,12 +106,11 @@ function App() {
           </div>
 
           <div className={`movie-card ${isMarioLeading ? 'leading' : ''}`}>
-            <div className="movie-poster mario-poster">
-              <div className="poster-content">
-                <h2>Super Mario</h2>
-                <p>Galaxy: Filmen</p>
-              </div>
-            </div>
+            <img 
+              src="https://m.media-amazon.com/images/M/MV5BNmI4YWM2MzktYjNjNy00YmM1LThhNmItOWM1ODkzMDYyZTk0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+              alt="Super Mario Galaxy: Filmen"
+              className="movie-poster mario-poster"
+            />
             <p className="release-date">3 april 2026</p>
             
             <div className="voting-section">
