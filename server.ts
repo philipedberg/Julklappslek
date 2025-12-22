@@ -43,7 +43,16 @@ app.post('/api/votes', (req, res) => {
   res.json(votes);
 });
 
-// Reset votes (for testing)
+// DELETE to reset votes
+app.delete('/api/votes', (req, res) => {
+  votes = {
+    avatar: 0,
+    mario: 0,
+  };
+  res.json(votes);
+});
+
+// Reset votes (for testing - kept for backward compatibility)
 app.post('/api/votes/reset', (req, res) => {
   votes = {
     avatar: 0,

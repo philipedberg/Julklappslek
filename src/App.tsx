@@ -61,6 +61,27 @@ function App() {
     }
   }
 
+  const handleReset = async () => {
+    if (!window.confirm('Är du säker på att du vill nollställa alla röster?')) {
+      return
+    }
+    setIsVoting(true)
+    try {
+      const response = await fetch(`${API_URL}/votes`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+      })
+      if (response.ok) {
+        const data = await response.json()
+        setVotes(data)
+      }
+    } catch (error) {
+      console.error('Failed to reset votes:', error)
+    } finally {
+      setIsVoting(false)
+    }
+  }
+
   const totalVotes = votes.avatar + votes.mario
   const avatarPercentage = totalVotes > 0 ? (votes.avatar / totalVotes) * 100 : 0
   const marioPercentage = totalVotes > 0 ? (votes.mario / totalVotes) * 100 : 0
@@ -139,6 +160,14 @@ function App() {
             Totalt {totalVotes} röst{totalVotes !== 1 ? 'er' : ''}
           </div>
         )}
+
+        <button 
+          className="reset-button"
+          onClick={handleReset}
+          disabled={isVoting}
+        >
+          Nollställ röster
+        </button>
       </div>
     </div>
   )
