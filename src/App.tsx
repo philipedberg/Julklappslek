@@ -73,7 +73,7 @@ function App() {
         <h1 className="title">God jul önskar Philip och Emelie</h1>
         
         <p className="subtitle">
-          I julklappar får ni en magisk bioupplevelse. Rösta på den som ni vill se allra mest.
+          I julklapp får ni en magisk bioupplevelse. Rösta på den som ni vill se allra mest.
         </p>
 
         <div className="movies-container">
@@ -83,7 +83,7 @@ function App() {
               alt="Avatar: Fire and Ash"
               className="movie-poster avatar-poster"
             />
-            <p className="release-date">17 december 2025</p>
+            <p className="release-date">Premiär: 17 december 2025</p>
             
             <div className="voting-section">
               <div className="vote-count">{votes.avatar} röster</div>
@@ -111,7 +111,7 @@ function App() {
               alt="Super Mario Galaxy: Filmen"
               className="movie-poster mario-poster"
             />
-            <p className="release-date">3 april 2026</p>
+            <p className="release-date">Premiär: 3 april 2026</p>
             
             <div className="voting-section">
               <div className="vote-count">{votes.mario} röster</div>
